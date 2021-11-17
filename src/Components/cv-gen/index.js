@@ -18,24 +18,63 @@ export default class CVGenerator extends Component {
                 zip: '',
                 country: '',
 
-                educationLastUsedIndex: 0,
-                education: [
-                    {
-                        id: 0,
-                        school: '',
-                        education: '',
-                        dateStart: '',
-                        dateEnd: '',
-                    }
-                ],
+                lastIndex: 0,
+                education: [],
                 experience: [],
             }
 
         this.setGeneral = this.setGeneral.bind(this);
+
         this.addEducation = this.addEducation.bind(this);
+        this.setEducationValue = this.setEducationValue.bind(this);
         this.removeEducation = this.removeEducation.bind(this);
+
         this.addExperience = this.addExperience.bind(this);
+        this.setExperienceValue = this.setExperienceValue.bind(this);
         this.removeExperience = this.removeExperience.bind(this);
+    }
+
+    addEntry(inArray, newEntry) {
+        this.setState(function(prevState) {
+            const newIndex = prevState.lastIndex + 1;
+            newEntry.id = newIndex;
+
+            const newArray = prevState[inArray].concat(newEntry);
+            
+            // should i return only the new state or the whole prevState?
+            return { [inArray]: newArray,
+                    lastIndex: newIndex };
+        });
+    }
+
+    removeEntry(inArray, id) {
+        this.setState(function(prevState) {
+            const newArray = prevState[inArray].filter((entry) => {
+                return entry.id !== id;
+            });
+
+            return {
+                [inArray]: newArray,
+            };
+        });
+    }
+
+    setValue(inArray, id, name, value) {
+        this.setState(function(prevState) {
+            const newArray = prevState[inArray].map((entry) => {
+                if (entry.id === id) {
+                    return {
+                        ...entry,
+                        [name]: value,
+                    };
+                }
+                return entry;
+            });
+
+            return {
+                [inArray]: newArray,
+            };
+        });
     }
 
     setGeneral(name, value) {
@@ -43,49 +82,56 @@ export default class CVGenerator extends Component {
     }
 
     addEducation() {
-        this.setState(function(prevState) {
-            const newIndex = prevState.educationLastUsedIndex + 1;
+        const educationTemplate = { school: '',
+                                    education: '',
+                                    dateStart: '',
+                                    dateEnd: '',
+                                  };
 
-            const newArray = prevState.education.concat(
-                {
-                    id: newIndex,
-                    school: '',
-                    education: '',
-                    dateStart: '',
-                    dateEnd: '',
-                }
-            );
-
-            // should i return only the new state or the whole prevState?
-            return {
-                educationLastUsedIndex: newIndex,
-                education: newArray,
-            };
-        });
+        this.addEntry('education', educationTemplate);
     }
 
     removeEducation(id) {
+        this.removeEntry('education', id);
     }
 
-    setEducation(id, name, value) {
+    setEducationValue(id, name, value) {
+        this.setValue('education', id, name, value);
     }
 
-    addExperience(experience) {
+    addExperience() {
+        const experienceTemplate = { company: '',
+                                    position: '',
+                                    dateStart: '',
+                                    dateEnd: '',
+                                    description: '',
+                                    };
+
+        this.addEntry('experience', experienceTemplate)
     }
 
     removeExperience(id) {
+        this.removeEntry('experience', id);
+    }
+
+    setExperienceValue(id, name, value) {
+        this.setValue('experience', id, name, value);
     }
 
     render() {
         return (
             <div className="cv-generator">
-                <CVGeneratorInput currentGeneral={this.state}
+                <CVGeneratorInput currentState={this.state}
                                   setGeneral={this.setGeneral}
+
                                   addEducation={this.addEducation}
+                                  setEducationValue={this.setEducationValue}
                                   removeEducation={this.removeEducation}
+
                                   addExperience={this.addExperience}
+                                  setExperienceValue={this.setExperienceValue}
                                   removeExperience={this.removeExperience}
-                                  educationArray={this.state.education}/>
+                                  />
                 <CVGeneratorOutput data={this.state}/>
             </div>
         );

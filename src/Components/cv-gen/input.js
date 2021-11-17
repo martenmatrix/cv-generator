@@ -14,7 +14,7 @@ class GeneralInput extends Component {
     }
 
     render() {
-    const currentGeneral = this.props.currentGeneral;
+    const currentState = this.props.currentState;
 
     const { firstName,
             lastName,
@@ -25,7 +25,7 @@ class GeneralInput extends Component {
             city,
             state,
             zip,
-            country } = currentGeneral;
+            country } = currentState;
     
 
     return (
@@ -52,62 +52,78 @@ class GeneralInput extends Component {
 class EducationInput extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            school: '',
-            education: '',
-            dateStart: '',
-            dateEnd: '',
-        };
-        
-        this.setState(
-            {
-                id: this.props.id,
-            }
-        )
 
-        this.add = this.add.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({
-            [name]: value
-        });
+        this.props.setEducationValue(this.props.data.id, name, value);
     }
 
     render() {
+    const {
+        id,
+        school,
+        education,
+        dateStart,
+        dateEnd } = this.props.data;
+    
+    const removeEducation = this.props.removeEducation;
+
       return (
         <div className="education">
             <div className="education-input">
-                <input type="text" value={this.state.school} onChange={this.handleChange} name="school" placeholder="School" />
-                <input type="text" value={this.state.education} onChange={this.handleChange} name="education" placeholder="Education" />
+                <input type="text" value={school} onChange={this.handleChange} name="school" placeholder="School" />
+                <input type="text" value={education} onChange={this.handleChange} name="education" placeholder="Education" />
                 <div className="date">
-                    <input type="text" value={this.state.dateStart} onChange={this.handleChange} name="dateStart" placeholder="Start" />
-                    <input type="text" value={this.state.dateEnd} onChange={this.handleChange} name="dateEnd" placeholder="End" />
+                    <input type="text" value={dateStart} onChange={this.handleChange} name="dateStart" placeholder="Start" />
+                    <input type="text" value={dateEnd} onChange={this.handleChange} name="dateEnd" placeholder="End" />
                 </div>
             </div>
-            <button>Delete</button>
+            <button onClick={() => removeEducation(id)}>Delete</button>
         </div>
       );
     }
 }
   
 class ExperienceInput extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.props.setExperienceValue(this.props.data.id, name, value);
+    }
+
     render() {
+      const { id,
+            company,
+            position,
+            dateStart,
+            dateEnd,
+            description
+            } = this.props.data;
+      
+      const removeExperience = this.props.removeExperience;
+
       return (
         <div className="experience">
-            <h2>Experience</h2>
             <div className="experience-input">
-                <input type="text" name="company" placeholder="Company" />
-                <input type="text" name="position" placeholder="Position" />
+                <input type="text" onChange={this.handleChange} value={company} name="company" placeholder="Company" />
+                <input type="text" onChange={this.handleChange} value={position} name="position" placeholder="Position" />
                 <div className="date">
-                    <input type="text" name="start" placeholder="Start" />
-                    <input type="text" name="end" placeholder="End" />
+                    <input type="text" onChange={this.handleChange} value={dateStart} name="dateStart" placeholder="Start" />
+                    <input type="text" onChange={this.handleChange} value={dateEnd} name="dateEnd" placeholder="End" />
                 </div>
-                <textarea name="description" placeholder="Description" />
+                <textarea name="description" onChange={this.handleChange} value={description} placeholder="Description" />
             </div>
+            <button onClick={() => removeExperience(id)}>Delete</button>
         </div>
       );
     }
@@ -115,26 +131,37 @@ class ExperienceInput extends Component {
   
 class CVGeneratorInput extends Component {   
     render() {
-      const { currentGeneral,
+      const { currentState,
               setGeneral,
+              setEducationValue,
               addEducation,
               removeEducation,
-              educationArray } = this.props;
+
+              addExperience,
+              removeExperience,
+              setExperienceValue,
+             } = this.props;
 
       return (
         <div className="cv-generator-input">
             <h2>General Info</h2>
-            <GeneralInput currentGeneral={currentGeneral}
+            <GeneralInput currentState={currentState}
                           setGeneral={setGeneral}/>
 
             <h2>Education</h2>
-            {educationArray.map((education, index) => <EducationInput key={index}
-                                                                      id={education.id}
-                                                                      removeEducation={removeEducation}/>)}
+            {currentState.education.map((education, index) => <EducationInput key={index}
+                                                                              data={education}
+                                                                              removeEducation={removeEducation}
+                                                                              setEducationValue={setEducationValue}/>)}
             
             <button onClick={addEducation}>Add</button>
 
-            <ExperienceInput/>
+            <h2>Experience</h2>
+            {currentState.experience.map((experience, index) => <ExperienceInput key={index}
+                                                                                 data={experience}
+                                                                                 removeExperience={removeExperience}
+                                                                                 setExperienceValue={setExperienceValue}/>)}
+            <button onClick={addExperience}>Add</button>
         </div>
       );
     }
