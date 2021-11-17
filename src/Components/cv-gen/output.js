@@ -39,7 +39,6 @@ class GeneralOutput extends Component {
 
       return (
         <div className="general">
-            <h2>General</h2>
             <Header name={`${firstName} ${lastName}`}
                     email={email}
                     phone={phone}/>
@@ -66,14 +65,27 @@ function Education(props) {
         <div className="education-section">
           <div className="education">{education}</div>
           <div className="school">{school}</div>
-          <div className="date">{`${dateStart} - ${dateEnd}`}</div>
+          <div className="date">{dateStart
+                                + ((dateStart&&dateEnd) ? '-' : '')
+                                + dateEnd}</div>
         </div>
     );
 }
 
 
 function Experience(props) {
-  return null
+
+  const { company,
+          position,
+          dateStart,
+          dateEnd,
+          description } = props.experience;
+
+  return (
+    <div className="experience-section">
+      
+    </div>
+  );
 }
 
   
@@ -85,14 +97,17 @@ class CVGeneratorOutput extends Component {
 
       return (
         <div className="cv-generator-output">
+            <h2>General</h2>
             <GeneralOutput data={data}/>
 
+            <h2>Education</h2>
             <div className="education">
             {educationArray.map((education, index) => (
                             <Education key={index} education={education}/>
                             ))}
             </div>
-
+            
+            <h2>Experience</h2>
             {experienceArray.map((experience, index) => (
                             <Experience key={index} experience={experience}/>
                             ))}
