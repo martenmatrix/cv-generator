@@ -83,7 +83,12 @@ function Experience(props) {
 
   return (
     <div className="experience-section">
-      
+      <div className="company">{company}</div>
+      <div className="position">{position}</div>
+      <div className="date">{dateStart
+                            + ((dateStart&&dateEnd) ? '-' : '')
+                            + dateEnd}</div>
+      <div className="description">{description}</div>
     </div>
   );
 }
