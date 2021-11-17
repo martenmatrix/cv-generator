@@ -3,29 +3,45 @@ import React, { Component } from 'react';
 class GeneralInput extends Component {
     constructor(props) {
         super(props);
+
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.props.onNewInput(event.target.name, event.target.value, 'general');
+        const name = event.target.name;
+        const value = event.target.value;
+        this.props.setGeneral(name, value);
     }
 
     render() {
-      return (
+    const currentGeneral = this.props.currentGeneral;
+
+    const { firstName,
+            lastName,
+            email,
+            phone,
+            street,
+            number,
+            city,
+            state,
+            zip,
+            country } = currentGeneral;
+    
+
+    return (
         <div className="general">
-            <h2>General Info</h2>
             <div className="general-input">
-                <input type="text" name="firstname" placeholder="First Name" />
-                <input type="text" name="lastname" placeholder="Last Name" />
-                <input type="text" name="email" placeholder="Email" />
-                <input type="text" name="phone" placeholder="Phone" />
+                <input type="text" onChange={this.handleChange} value={firstName} name="firstName" placeholder="First Name" />
+                <input type="text" onChange={this.handleChange} value={lastName} name="lastName" placeholder="Last Name" />
+                <input type="text" onChange={this.handleChange} value={email} name="email" placeholder="Email" />
+                <input type="text" onChange={this.handleChange} value={phone} name="phone" placeholder="Phone" />
                 <div className="address">
-                    <input type="text" name="street" placeholder="Street" />
-                    <input type="text" name="number" placeholder="Number" />
-                    <input type="text" name="city" placeholder="City" />
-                    <input type="text" name="state" placeholder="State" />
-                    <input type="text" name="zip" placeholder="Zip" />
-                    <input type="text" name="country" placeholder="Country" />
+                    <input type="text" onChange={this.handleChange} value={street} name="street" placeholder="Street" />
+                    <input type="text" onChange={this.handleChange} value={number} name="number" placeholder="Number" />
+                    <input type="text" onChange={this.handleChange} value={city} name="city" placeholder="City" />
+                    <input type="text" onChange={this.handleChange} value={state} name="state" placeholder="State" />
+                    <input type="text" onChange={this.handleChange} value={zip} name="zip" placeholder="Zip" />
+                    <input type="text" onChange={this.handleChange} value={country} name="country" placeholder="Country" />
                 </div>
             </div>
         </div>
@@ -34,18 +50,45 @@ class GeneralInput extends Component {
   }
   
 class EducationInput extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            school: '',
+            education: '',
+            dateStart: '',
+            dateEnd: '',
+        };
+        
+        this.setState(
+            {
+                id: this.props.id,
+            }
+        )
+
+        this.add = this.add.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        });
+    }
+
     render() {
       return (
         <div className="education">
-            <h2>Education</h2>
             <div className="education-input">
-                <input type="text" name="school" placeholder="School" />
-                <input type="text" name="education" placeholder="Education" />
+                <input type="text" value={this.state.school} onChange={this.handleChange} name="school" placeholder="School" />
+                <input type="text" value={this.state.education} onChange={this.handleChange} name="education" placeholder="Education" />
                 <div className="date">
-                    <input type="text" name="start" placeholder="Start" />
-                    <input type="text" name="end" placeholder="End" />
+                    <input type="text" value={this.state.dateStart} onChange={this.handleChange} name="dateStart" placeholder="Start" />
+                    <input type="text" value={this.state.dateEnd} onChange={this.handleChange} name="dateEnd" placeholder="End" />
                 </div>
             </div>
+            <button>Delete</button>
         </div>
       );
     }
@@ -70,15 +113,28 @@ class ExperienceInput extends Component {
     }
 }
   
-class CVGeneratorInput extends Component {
+class CVGeneratorInput extends Component {   
     render() {
-      const { onNewInput } = this.props;
+      const { currentGeneral,
+              setGeneral,
+              addEducation,
+              removeEducation,
+              educationArray } = this.props;
 
       return (
         <div className="cv-generator-input">
-            <GeneralInput onNewInput={onNewInput}/>
-            <EducationInput onNewInput={onNewInput}/>
-            <ExperienceInput onNewInput={onNewInput}/>
+            <h2>General Info</h2>
+            <GeneralInput currentGeneral={currentGeneral}
+                          setGeneral={setGeneral}/>
+
+            <h2>Education</h2>
+            {educationArray.map((education, index) => <EducationInput key={index}
+                                                                      id={education.id}
+                                                                      removeEducation={removeEducation}/>)}
+            
+            <button onClick={addEducation}>Add</button>
+
+            <ExperienceInput/>
         </div>
       );
     }

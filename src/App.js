@@ -19,23 +19,11 @@ class App extends Component {
         email: 'peter',
       }
     }
-    
-    this.replace = this.replace.bind(this);
-  }
-
-  replace() {
-    this.setState({
-      information: {
-        name: 'marten',
-      }
-    })
-    console.log(this.state)
   }
 
   render() {
     return (
       <div className="app">
-        <input type="password" onChange={this.replace}></input>
         <NavBar />
         <CVGenerator />
       </div>
