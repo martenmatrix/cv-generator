@@ -56,12 +56,11 @@ class GeneralOutput extends Component {
 }
 
 function Education(props) {
-    const data = props.data;
     const {
         school,
         education,
         dateStart,
-        dateEnd, } = data;
+        dateEnd, } = props.education;
 
     return (
         <div className="education-section">
@@ -73,35 +72,30 @@ function Education(props) {
 }
 
 
-class EducationOutput extends Component {
-    render() {
-      return (
-        <div className="education">
-  
-        </div>
-      );
-    }
+function Experience(props) {
+  return null
 }
-  
-class ExperienceOutput extends Component {
-    render() {
-      return (
-        <div className="experience">
-  
-        </div>
-      );
-    }
-}
+
   
 class CVGeneratorOutput extends Component {
     render() {
       const data = this.props.data;
+      const educationArray = data.education;
+      const experienceArray = data.experience;
 
       return (
         <div className="cv-generator-output">
             <GeneralOutput data={data}/>
-            <EducationOutput />
-            <ExperienceOutput />
+
+            <div className="education">
+            {educationArray.map((education, index) => (
+                            <Education key={index} education={education}/>
+                            ))}
+            </div>
+
+            {experienceArray.map((experience, index) => (
+                            <Experience key={index} experience={experience}/>
+                            ))}
         </div>
       );
     }
