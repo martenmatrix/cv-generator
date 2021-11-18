@@ -1,14 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import CVGenerator from './Components/cv-gen';
-
-function NavBar() {
-  return (
-    <div className="navbar">
-      <h1 className="title">CV Generator</h1>
-    </div>
-  )
-}
+import NavBar from './Components/navbar';
 
 class App extends Component {
   constructor(props) {
