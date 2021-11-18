@@ -103,20 +103,28 @@ class CVGeneratorOutput extends Component {
 
       return (
         <div className="cv-generator-output">
-            <h2>General</h2>
-            <GeneralOutput data={data}/>
+            <div className="cv-output">
+              <div className="general-output">
+                <h2>General</h2>
+                <GeneralOutput data={data}/>
+              </div>
 
-            <h2>Education</h2>
-            <div className="education">
-            {educationArray.map((education, index) => (
-                            <Education key={index} education={education}/>
-                            ))}
+              <div className="education-output">
+                <h2>Education</h2>
+                <div className="education">
+                {educationArray.map((education, index) => (
+                                <Education key={index} education={education}/>
+                                ))}
+                </div>
+              </div>
+
+              <div className="experience-output">
+                <h2>Experience</h2>
+                {experienceArray.map((experience, index) => (
+                                <Experience key={index} experience={experience}/>
+                                ))}
+              </div>
             </div>
-            
-            <h2>Experience</h2>
-            {experienceArray.map((experience, index) => (
-                            <Experience key={index} experience={experience}/>
-                            ))}
         </div>
       );
     }

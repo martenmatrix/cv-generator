@@ -1,0 +1,56 @@
+.cv-generator {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.cv-generator > div {
+    height: 100%;
+    flex: 1 1 auto;
+}
+
+.cv-output {
+    width: 210mm;
+    height: 297mm;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(10px, 1fr));
+    grid-template-rows: minmax(10px, 0.5fr) minmax(10px, 1fr) minmax(10px, 3fr);
+
+    color: black;
+    background: white;
+
+    box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.5);
+    margin: 5em;
+    padding: 1em;
+    }
+
+.cv-generator-output .education-output {
+    grid-column: span 2;
+    grid-row: 3;
+}
+
+.cv-generator-output .experience-output {
+    grid-column: 4 / span 2;
+    grid-row: 3;
+}
+
+.cv-generator-input {
+    margin-left: 2vw;
+}
+
+.general-input > .address {
+    border: 1px solid white;
+    width: min-content;
+}
+
+.education button,
+.experience button {
+    color: red;
+}
+
+.experience-section,
+.education-section {
+    margin: 0 0 1em 0;
+    word-wrap: break-word;
+}
