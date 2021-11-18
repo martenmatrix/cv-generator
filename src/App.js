@@ -1,4 +1,3 @@
-import './App.css';
 import React, { Component } from 'react';
 import CVGenerator from './Components/cv-gen';
 import NavBar from './Components/navbar';

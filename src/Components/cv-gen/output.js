@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/cv-gen.css';
 
 function Header(props) {
     return (
