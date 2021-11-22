@@ -1,26 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CVGenerator from './Components/cv-gen';
 import NavBar from './Components/navbar';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      information: {
-        name: '',
-        email: 'peter',
-      }
-    }
-  }
 
-  render() {
+function App() {
     return (
-      <div className="app">
-        <NavBar />
-        <CVGenerator />
-      </div>
-    );
-  }
+        <div className="app">
+          <NavBar />
+          <CVGenerator />
+        </div>
+      );
 }
 
 export default App;
