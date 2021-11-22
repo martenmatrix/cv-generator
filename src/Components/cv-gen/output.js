@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/cv-gen.css';
 
 function Header(props) {
@@ -24,36 +24,36 @@ function Address(props) {
     );
 }
 
-class GeneralOutput extends Component {
-    render() {
-      const { firstName,
-              lastName,
-              email,
-              phone,
-              
-              street,
-              number,
-              city,
-              state,
-              zip,
-              country } = this.props.data;
+function GeneralOutput(props) {
+  const { firstName,
+    lastName,
+    email,
+    phone,
+    
+    street,
+    number,
+    city,
+    state,
+    zip,
+    country } = props.data;
 
-      return (
+    return (
         <div className="general">
-            <Header name={`${firstName} ${lastName}`}
-                    email={email}
-                    phone={phone}/>
-
-            <Address street={street}
-                     number={number}
-                     city={city}
-                     state={state}
-                     zip={zip}
-                     country={country}/>
+          <Header name={`${firstName} ${lastName}`}
+                  email={email}
+                  phone={phone}/>
+        
+          <Address street={street}
+                   number={number}
+                   city={city}
+                   state={state}
+                   zip={zip}
+                   country={country}/>
         </div>
-      );
-    }
+    );
 }
+
+
 
 function Education(props) {
     const {
@@ -94,40 +94,37 @@ function Experience(props) {
   );
 }
 
+function CVGeneratorOutput(props) {
+  const data = props.data;
+  const education = data.education;
+  const experience = data.experience;
+
+  return (
+    <div className="cv-generator-output">
+        <div className="cv-output">
+          <div className="general-output">
+            <h2>General</h2>
+            <GeneralOutput data={data}/>
+          </div>
   
-class CVGeneratorOutput extends Component {
-    render() {
-      const data = this.props.data;
-      const educationArray = data.education;
-      const experienceArray = data.experience;
-
-      return (
-        <div className="cv-generator-output">
-            <div className="cv-output">
-              <div className="general-output">
-                <h2>General</h2>
-                <GeneralOutput data={data}/>
-              </div>
-
-              <div className="education-output">
-                <h2>Education</h2>
-                <div className="education">
-                {educationArray.map((education, index) => (
-                                <Education key={index} education={education}/>
-                                ))}
-                </div>
-              </div>
-
-              <div className="experience-output">
-                <h2>Experience</h2>
-                {experienceArray.map((experience, index) => (
-                                <Experience key={index} experience={experience}/>
-                                ))}
-              </div>
+          <div className="education-output">
+            <h2>Education</h2>
+            <div className="education">
+            {education.map((education, index) => (
+                            <Education key={index} education={education}/>
+                            ))}
             </div>
+          </div>
+            
+          <div className="experience-output">
+            <h2>Experience</h2>
+            {experience.map((experience, index) => (
+                            <Experience key={index} experience={experience}/>
+                            ))}
+          </div>
         </div>
-      );
-    }
+    </div>
+  );
 }
 
 export default CVGeneratorOutput;

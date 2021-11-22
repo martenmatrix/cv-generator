@@ -8,6 +8,7 @@ function CVGenerator(props) {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [street, setStreet] = useState('');
+    const [number, setNumber] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zip, setZip] = useState('');
@@ -23,6 +24,7 @@ function CVGenerator(props) {
         email,
         phone,
         street,
+        number,
         city,
         state,
         zip,
@@ -88,6 +90,8 @@ function CVGenerator(props) {
             setPhone(value);
         } else if (name === 'street') {
             setStreet(value);
+        } else if (name === 'number') {
+            setNumber(value);
         } else if (name === 'city') {
             setCity(value);
         } else if (name === 'state') {
@@ -125,15 +129,15 @@ function CVGenerator(props) {
                                     description: '',
                                     };
 
-        this.addEntry('experience', experienceTemplate)
+        addEntry('experience', experienceTemplate)
     }
 
     function removeExperience(id) {
-        this.removeEntry('experience', id);
+        removeEntry('experience', id);
     }
 
     function setExperienceValue(id, name, value) {
-        this.setValue('experience', id, name, value);
+        setValue('experience', id, name, value);
     }
 
     return (
@@ -149,7 +153,7 @@ function CVGenerator(props) {
                               setExperienceValue={setExperienceValue}
                               removeExperience={removeExperience}
                               />
-            <CVGeneratorOutput data={state}/>
+            <CVGeneratorOutput data={stateObject}/>
         </div>
     );
 }

@@ -45,7 +45,7 @@ function EducationInput(props) {
     function handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        props.setEducationValue(name, value);
+        props.setEducationValue(props.data.id, name, value);
     }
 
     const { 
@@ -55,7 +55,7 @@ function EducationInput(props) {
         dateStart,
         dateEnd } = props.data;
 
-    const removeEducation = this.props.removeEducation;
+    const removeEducation = props.removeEducation;
 
     return (
       <div className="education">
@@ -76,7 +76,7 @@ function ExperienceInput(props) {
     function handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        this.props.setExperienceValue(props.data.id, name, value);
+        props.setExperienceValue(props.data.id, name, value);
     }
 
     const { id,
@@ -85,9 +85,9 @@ function ExperienceInput(props) {
           dateStart,
           dateEnd,
           description
-          } = this.props.data;
+          } = props.data;
     
-    const removeExperience = this.props.removeExperience;
+    const removeExperience = props.removeExperience;
 
     return (
       <div className="experience">
