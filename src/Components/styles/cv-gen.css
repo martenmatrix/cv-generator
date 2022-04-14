@@ -39,6 +39,10 @@
     margin-left: 2vw;
 }
 
+.cv-generator-input h2 {
+    color: white;
+}
+
 .general-input > .address {
     border: 1px solid white;
     width: min-content;
