@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# CV Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple React application to create a Curriculum Vitae. The user is able to enter his personal information, add experience sections and add education sections.
 
-## Available Scripts
+It was written in React classes and then rewritten to with function components. The React classes version is located in the `main` branch and the functional component's version is located in the `function-component-rewrite`.
 
-In the project directory, you can run:
+## Table of Contents
+- [Deployed links](#globe_with_meridians-deployed-links)
+- [Usage](#grey_exclamation-usage)
+- [Features](#sparkles-features)
+- [Installation](#wrench-installation)
+- [Technology stack](#blue_book-technology-stack)
+- [License](#scroll-license)
 
-### `npm start`
+## :globe_with_meridians: Deployed links
+The application is hosted at the following address:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- https://martenmatrix.github.io/cv-generator/
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## :grey_exclamation: Usage
+1. Enter your personal information like your first name, last name, e-mail, phone and address in the section with the title of "General Info".
+2. In the section "Education", you are able to add your education. You are able to enter the name of the school, a brief description about your education and a timeframe. If you want to add another education section, just click the "Add" button.
+3. In the section "Experience", you are able to add your experience. You are able to enter the company you've worked at, the position you've held, a timeframe and a brief description. If you want to add another experience section, just click the "Add" button.
+> :warning: Exports are currently not supported. You'll have to take a screenshot.
 
-### `npm test`
+If something does not work as expected, or you have a suggestion, please [create an issue](https://github.com/martenmatrix/cv-generator/issues/new).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## :sparkles: Features
+- create a CV
+- the CV updates as you type
+- add general information
+- add multiple education sections
+- add multiple experience sections
 
-### `npm run build`
+##  :wrench: Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If you want to run the application on your local pc or just want to contribute, do the following steps:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository.
+	`git clone https://github.com/martenmatrix/cv-generator`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install the dependencies.
+	`npm install`
 
-### `npm run eject`
+3. If you want to run the website on your localhost type: 
+	`npm run start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. If you want to build the website for deployment run:
+	`npm run build`
+	A folder called `build` should get created.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## :blue_book: Technology Stack
+- **Create React App** v4.0.3
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## :scroll: License
+[MIT](https://github.com/martenmatrix/cv-generator/blob/main/LICENSE)
